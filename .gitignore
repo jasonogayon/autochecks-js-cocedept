@@ -1,0 +1,14 @@
+*.DS_Store
+*.png
+*.pdf
+*.log
+*.html
+.env
+.archive
+
+build/
+mochawesome-report/
+node_modules/
+output/
+tests/.DS_Store
+yarn.lock
