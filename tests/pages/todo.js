@@ -11,12 +11,16 @@ class Todo extends Page {
   constructor(url) {
     super(url);
 
-    this.header = "//h1[.='todos']";
-    this.spanTodoCount = "span.todo-count";
-    this.inputNewTodo = "input.new-todo";
     this.buttonRemove = "//button[@class='destroy']";
-    this.toggleComplete = "//input[@class='toggle']";
+    this.header = "//h1[.='todos']";
+    this.inputNewTodo = "input.new-todo";
+    this.linkAll = "//a[.='All']";
+    this.linkActive = "//a[.='Active']";
+    this.linkCompleted = "//a[.='Completed']";
+    this.listTodos = "//ul[@class='todo-list']//li";
+    this.spanTodoCount = "span.todo-count";
     this.toggleAll = "//label[@for='toggle-all']";
+    this.toggleComplete = "//input[@class='toggle']";
   }
 
 
@@ -102,7 +106,6 @@ class Todo extends Page {
    * Mark all todos as completed or active.
    *
    * @function toggleAllToDos
-   * @param {Boolean} complete
   */
   async toggleAllToDos() {
     const toggleComplete = this.toggleAll;
@@ -111,6 +114,22 @@ class Todo extends Page {
     I.click(toggleComplete);
     I.wait(1);
   }
+
+
+  /**
+   * View completed or active todos.
+   *
+   * @function viewCompletedToDos
+   * @param {Boolean} complete
+  */
+  async viewCompletedToDos(complete = true) {
+    const linkButton = complete ? this.linkCompleted : this.linkActive;
+
+    await this.scrollIntoViewSmoothly(linkButton);
+    I.click(linkButton);
+    I.wait(1);
+  }
+
 
 }
 

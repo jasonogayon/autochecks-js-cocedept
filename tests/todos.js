@@ -154,3 +154,58 @@ Scenario("Todo input has a placeholder value of 'What needs to be done?'", async
   assert.equal(await app.getTextContent(app.inputNewTodo), "");
   assert.equal(await app.getAttributeValue(app.inputNewTodo, 'placeholder'), "What needs to be done?");
 })
+
+
+Scenario("Can view completed or active todos", async (I) => {
+  // Add Multiple Todos
+  const todos = [ 'todo #1', 'todo #2', 'todo #3' ];
+  todos.forEach(async (todo) => {
+    await app.addToDo(todo);
+  })
+
+  // Check that All Todos are Added
+  todos.forEach(async (todo) => {
+    assert.equal(await app.getVisibleQty(`//li[.='${todo}']`), 1, `Unable to add todo: ${todo}`);
+  })
+
+  // Mark a Single Todo as Completed
+  const randomTodo = todos[Math.floor(Math.random() * todos.length)];
+  await app.markAsCompleted(randomTodo);
+
+  // View Only Completed Todos and Check that Only One Todo is Visible
+  const list = app.listTodos;
+  await app.viewCompletedToDos();
+  assert.equal(await app.getVisibleQty(list), 1);
+  assert.isTrue((await app.getTextContent(list)).includes(randomTodo));
+
+  // View Only Active Todos and Check that the Other Todos are Visible
+  await app.viewCompletedToDos(false);
+  assert.equal(await app.getVisibleQty(list), 2);
+  assert.isFalse((await app.getTextContent(list)).includes(randomTodo));
+})
+
+
+Scenario("Adding a todo from the /completed page adds the todo but won't display from there", async (I) => {
+  // Add Multiple Todos
+  const todos = [ 'todo #1', 'todo #2', 'todo #3' ];
+  todos.forEach(async (todo) => {
+    await app.addToDo(todo);
+  })
+
+  // View Only Completed Todos
+  await app.viewCompletedToDos();
+
+  // Add a Todo
+  const todo = 'an active todo';
+  await app.addToDo(todo);
+
+  // Check that Todo is Not Displayed in the Page
+  assert.equal(await app.getVisibleQty(`//li[.='${todo}']`), 0, `Todo is displayed in page when it should not: ${todo}`);
+
+  // Check that Number of Items Left is Correct
+  assert.equal(await app.getTextContent(app.spanTodoCount), "4 items left");
+
+  // View Only Active Todos and Check that the Todo is There
+  await app.viewCompletedToDos(false);
+  assert.equal(await app.getVisibleQty(`//li[.='${todo}']`), 1, `Missing todo: ${todo}`);
+})
