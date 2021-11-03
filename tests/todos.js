@@ -70,7 +70,7 @@ Scenario("Can edit a todo", async (I) => {
   const todo = 'todo X';
   await app.addToDo(todo);
 
-  // Remove Todo
+  // Edit Todo
   let hasTodo = (await app.getVisibleQty(`//li[.='${todo}']`)) > 0;
   if (hasTodo) {
     const newTodo = 'todo Y';
