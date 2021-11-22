@@ -18,11 +18,9 @@
 
 6. After that, we can try to run our tests again and see if they proceed. Run `yarn run test:local` or `make ui` again.
 
-7. The tests does not run because in order to run CodeceptJS tests locally, we have to first boot up Selenium Webdriver via Selenium Standalone. So let's open up a new terminal window.
+7. The tests does not run because in order to run CodeceptJS tests locally, we have to first install Selenium-Standalone server and drivers locally on our project. Install by running `npx selenium-standalone install`.
 
-8. And start our Selenium Webdriver by running `selenium-standalone start` or `make s`.
-
-9. Once Selenium is running, we can now go back to our other terminal window and run the tests again. They should run without a hitch this time.
+8. Once those are installed, we can now run the tests again, without a hitch this time.
 
 ---
 
@@ -42,11 +40,17 @@
 
 ---
 
+![Sample Mochawesome Test Report](./docs/11222021-test-report.png)
+
 ### Reports
 
 Running the CodeceptJS tests locally or browserstack each generate its own separate report after each complete run. You can find the reports inside the **output** directory.
 
 They are in HTML format and the filenames are in a format that includes the date of the test run as well as whether the run occured locally or on Browserstack.
+
+Below is a screenshot of a sample Browserstack test run:
+
+![Sample Browserstack Test Report On Web](./docs/11222021-test-report-bs-web.png)
 
 ---
 

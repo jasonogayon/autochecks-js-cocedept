@@ -4,10 +4,15 @@
   "description": "ToDoMVC React Automated Checks using Javascript and CodeceptJS",
   "main": "index.js",
   "scripts": {
-    "test:headless": "codeceptjs run --config=./codecept.headless.js --reporter mocha-multi",
-    "test:headless-parallel": "codeceptjs run-workers 4 --config=./codecept.headless.js",
-    "test:local": "codeceptjs run --config=./codecept.local.js --reporter mocha-multi",
-    "test:local-parallel": "codeceptjs run-workers 4 --config=./codecept.local.js",
+    "server": "npx selenium-standalone start",
+    "headless": "codeceptjs run --config=./codecept.headless.js --reporter mocha-multi",
+    "headless-parallel": "codeceptjs run-workers 4 --config=./codecept.headless.js",
+    "local": "codeceptjs run --config=./codecept.local.js --reporter mocha-multi",
+    "local-parallel": "codeceptjs run-workers 4 --config=./codecept.local.js",
+    "test:headless": "start-server-and-test server 4444 headless",
+    "test:headless-parallel": "start-server-and-test server 4444 headless-parallel",
+    "test:local": "start-server-and-test server 4444 local",
+    "test:local-parallel": "start-server-and-test server 4444 local-parallel",
     "test:browserstack": "codeceptjs run --config=./codecept.browserstack.js --reporter mocha-multi",
     "test:browserstack-parallel": "codeceptjs run-workers 4 --config=./codecept.browserstack.js"
   },
@@ -28,7 +33,9 @@
     "mochawesome": "^6.1.1",
     "moment": "^2.26.0",
     "node-cron": "^2.0.3",
-    "selenium-standalone": "^7.1.0",
+    "selenium-standalone": "^8.0.4",
+    "start-server-and-test": "^1.14.0",
+    "unirest": "^0.6.0",
     "webdriverio": "^6.5.2"
   }
 }

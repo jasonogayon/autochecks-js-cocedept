@@ -2,7 +2,7 @@ const baseUrl = "https://www.todomvc.com/examples/react/#/";
 
 module.exports = {
   headless: false,
-  timeout: 120,
+  timeout: 60,
   retries: {
     default: 0,
   },

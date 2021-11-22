@@ -32,7 +32,7 @@ help:
 
 
 s:
-	@selenium-standalone start
+	@npx selenium-standalone start
 
 ui:
 	@echo "Running tests ..."; echo ""

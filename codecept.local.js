@@ -12,15 +12,15 @@ const driverCapabilities = browser === 'firefox'
   ? {
     url: 'http://localhost',
     browser: 'firefox',
-    capabilities: {
-      alwaysMatch: {
-        'moz:firefoxOptions': {
-          prefs: {
-            "permissions.default.microphone": 1,
-            "permissions.default.camera": 1,
-            "media.navigator.permission.disabled": true,
-            "media.navigator.streams.fake": true
-          }
+    desiredCapabilities: {
+      browserName: "firefox",
+      'moz:firefoxOptions': {
+        args: [],
+        prefs: {
+          "permissions.default.microphone": 1,
+          "permissions.default.camera": 1,
+          "media.navigator.permission.disabled": true,
+          "media.navigator.streams.fake": true
         }
       }
     }
@@ -29,6 +29,7 @@ const driverCapabilities = browser === 'firefox'
     url: 'http://localhost',
     browser: "chrome",
     desiredCapabilities: {
+      browserName: "chrome",
       chromeOptions: {
         args: [
           '--disable-gpu',

@@ -95,7 +95,7 @@ class Todo extends Page {
     const todo = `//li[.='${text}']`;
     const toggleComplete = `${todo}${this.toggleComplete}`;
 
-    I.waitForVisible(toggleComplete, timeout);
+    I.waitForElement(toggleComplete, timeout);
     if (complete) I.checkOption(toggleComplete);
     if (!complete) I.uncheckOption(toggleComplete);
     I.wait(1);

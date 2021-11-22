@@ -1,5 +1,4 @@
 *.DS_Store
-*.png
 *.pdf
 *.log
 *.html
@@ -11,4 +10,3 @@ mochawesome-report/
 node_modules/
 output/
 tests/.DS_Store
-yarn.lock
